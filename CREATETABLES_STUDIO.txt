@@ -11,32 +11,53 @@ source_name text ,
 source_unique_code number primary key,
 source_type text
 );
-insert into banks(source_name, source_unique_code, source_type) values ("ANZ", "23e45", "credit");
+insert into banks(source_name, source_unique_code, source_type)
+values ("ANZ", "23e45", "credit");
+insert into banks(source_name, source_unique_code,source_type)
+values("BNZ", "234e", "debit");
+insert into banks(source_name, source_unique_code,source_type)
+values("ASB", "56gt", "cheque");
+insert into banks(source_name, source_unique_code, source_type)
+values("kiwibank", "456t", "debit");
+insert into banks(source_name, source_unique_code, source_type)
+values("Westpac", "rt5", "cheque");
+insert into banks(source_name, source_unique_code, source_type)
+values("BNZ", "234c", "credit");
+insert into banks(source_name, source_unique_code, source_type)
+values("ASB", "56gc", "debit");
+insert into banks(source_name, source_unique_code, source_type)
+values("ANZ", "23E45", "cheque");
+insert into banks(source_name, source_unique_code, source_type)
+values("Westpac", "rt5d", "debit");
+insert into banks(source_name, source_unique_code, source_type)
+values("kiwibank", "456tc", "credit");
+select * from banks;
 
-insert into banks(source_name, source_unique_code,source_type)  values ("BNZ", "234e", "debit");
 
-insert into banks(source_name, source_unique_code,source_type)  values ("ASB", "56gt", "cheque");
-
-
-Create table bills(
+Create table bills (
 bill_number number primary key,
-bill_type text,
-bill_amount currency,
+type text,
+amount currency,
 due_dates number,
 customer_id text,
 source_unique_code number,
 foreign key (customer_id) references customer(customer_id)
 foreign key (source_unique_code) references banks(source_unique_code)
 );
-insert into bills (bill_number, bill_type, bill_amount, due_dates) values ("234", "water", "$243", "12/03/2023");
-
-insert into bills (bill_number, bill_type, bill_amount, due_dates) values ("235", "electricity", "$123", "21/03/2023");
-
-insert into bills (bill_number, bill_type, bill_amount, due_dates) values ("266", "rent", "$120", "22/03/2023");
-
-insert into bills (bill_number, bill_type, bill_amount, due_dates) values ("270", "internet", "$213", "24/03/2023");
-
-insert into bills (bill_number, bill_type, bill_amount, due_dates) values ("276", "mobile phone", "$255", "27/03/2023"); 
+insert into bills (bill_number, type, amount, due_dates, customer_id, source_unique_code) values ("234", "water", "$243", "12/03/2023", "003", "56gt");
+insert into bills (bill_number, type, amount, due_dates, customer_id, source_unique_code) values ("235", "electricity", "$123", "21/03/2023", "005", "56gt");
+insert into bills (bill_number, type, amount, due_dates, customer_id, source_unique_code) values ("266", "rent", "$120", "22/03/2023", "001", "234e");
+insert into bills (bill_number, type, amount, due_dates, customer_id, source_unique_code) values ("270", "internet", "$213", "24/03/2023", "002", "23e45");
+insert into bills (bill_number, type, amount, due_dates, customer_id, source_unique_code) values ("276", "mobile phone", "$255", "27/03/2023", "009", "234e"); 
+insert into bills (bill_number, type, amount, due_dates, customer_id, source_unique_code) values ("279", "TV", "$266", "30/03/2023", "007", "23e45");
+insert into bills (bill_number, type, amount, due_dates, customer_id, source_unique_code) values ("280", "Wi-Fi", "$234", "31/03/2023", "003", "456tc");
+insert into bills (bill_number, type, amount, due_dates, customer_id, source_unique_code) values ("281", "water", "$212", "31/03/2023", "004", "rt5d");
+insert into bills (bill_number, type, amount, due_dates, customer_id, source_unique_code) values ("283", "rent", "$129", "01/04/2023", "001", "56gc");
+insert into bills (bill_number, type, amount, due_dates, customer_id, source_unique_code) values ("285", "internet", "$156", "03/04/2023", "005", "23E45");
+insert into bills (bill_number, type, amount, due_dates, customer_id, source_unique_code) values ("286", "Mobile phone", "$167", "05/04/2023", "006", "rt5");
+insert into bills (bill_number, type, amount, due_dates, customer_id, source_unique_code) values ("289", "TV", "$122", "08/04/2023", "002", "456t");
+insert into bills (bill_number, type, amount, due_dates, customer_id, source_unique_code) values ("290", "electricity", "$345", "09/04/2023", "001", "56gt");
+select * from bills;
 select * from bills;
 
 
@@ -44,21 +65,28 @@ select * from bills;
 create table customer(
 customer_name text,
 customer_id integer primary key autoincrement,
-customer_bank balance text,
+customer_bank balance number,
 customer_account number interger
 );
 
-insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Mia", 001, "$3500", 10034);
+insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Mia", 001, 3500, 10034);
 
-insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Riya", 002, "$2000", 10035);
+insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Riya", 002, 2000, 10035);
 
-insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Shilong", 003, "$2000", 10036);
+insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Shilong", 003, 2000, 10036);
 
-insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Prabhikt", 004, "$7000", 10037);
+insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Prabhikt", 004, 7000, 10037);
 
-insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Yager", 005, "$3000", 10038);
+insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Zhang", 005, 3000, 10038);
 
-insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Zain", 006, "$1800", 10039);
+insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Zain", 006, 1800, 10039);
+
+insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Mitchell", 007, 9000, 10040);
+
+insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Ryan", 008, 5000, 10041);
+
+insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Selena", 009, 1000, 10042);
+
 
 
 
@@ -68,7 +96,7 @@ Insert into associative_notification( notification_type,customer_id,Provider_nam
 
 Insert into associative_notification( notification_type,customer_id,Provider_name) values (“paid”, 002,"Power_Grid_Corporation");
 
-Insert into associative_notification( notification_type,customer_id,Provider_name) values (“paid”, 001,"landlord");
+Insert into associative_notification( notification_type,customer_id,Provider_name) values (“paid”, 005,"landlord");
 
 Insert into associative_notification( notification_type,customer_id,Provider_name) values (“due”, 004,"landlord");
 
@@ -78,22 +106,54 @@ Insert into associative_notification( notification_type,customer_id,Provider_nam
 
 Insert into associative_notification( notification_type,customer_id,Provider_name) values (“due”, 006,"Telecom");
 
+Insert into associative_notification( notification_type,customer_id,Provider_name) values (“paid”, 09,"life_insurance");
 
+Insert into associative_notification( notification_type,customer_id,Provider_name) values (“missed”, 004,"Wanda");
+
+Insert into associative_notification( notification_type,customer_id,Provider_name) values (“missed”, 008,"Didi_Dache");
+
+Insert into associative_notification( notification_type,customer_id,Provider_name) values (“paid”, 008,"Wanda");
+
+Insert into associative_notification( notification_type,customer_id,Provider_name) values (“due”, 007,"Didi_Dache");
 
 Create table providers(
 
 Provider_name text,
 
-Provider_address text,
+Provider_address text，
 
 Provider_type text
 
 );
 
-Insert into providers(Provider_name, Provider_address, Provider_type)values(“Telecom”, “33 Tianren Road, Shanghai”, “communication”);
+Insert into providers(provider_name, provider_address, Provider_type)values("Telecom", "63_Tianren_Road, Shanghai", "Communication");
 
-Insert into providers(Provider_name, Provider_address, Provider_type)values(“Power_Grid_Corporation”, “33 Jiahe Road, Chaoyang District, Beijing”, “electricity”);
+Insert into providers(provider_name, provider_address, Provider_type)values("Power_Grid_Corporation", "33_Jiahe_Road, Chaoyang_District, Beijing", "Electricity");
 
-Insert into providers(Provider_name, Provider_address, Provider_type)values(“landlord”, “5 queen st, AUCKLAND”, “land”);
+Insert into providers(provider_name, provider_address, Provider_type)values("landlord", "58_Queen_st, Xiamen_City", "land");
 
-Insert into providers(Provider_name, Provider_address, Provider_type)values(“Water_Corporation”,"5 queen st, AUCKLAND”, ”Water”);
+Insert into providers(provider_name, provider_address, Provider_type)values("Water_Corporation",  "48_Weakfield_st, Nanjing_City", "Water");
+
+Insert into providers(provider_name, provider_address, Provider_type)values("Petrochemical_corporation", "91_Howick_Chongqin", "Petroleum");
+
+Insert into providers(provider_name, provider_address, Provider_type)values("Great_wall_broadband", "52_Xiahe_st, Tianjing", "Broadband");
+
+Insert into providers(provider_name, provider_address, Provider_type)values("life_insurance", "11_Jack_st, Hubei", "Insurance");
+
+Insert into providers(provider_name, provider_address, Provider_type)values("Didi_Dache", "41_Dongfnagbali", "Taxi");
+
+Insert into providers(provider_name, provider_address, Provider_type)values("Tiandi_Bank", "98_Wuhanhan_Road, Wuhan", "Credit");
+
+Insert into providers(provider_name, provider_address, Provider_type)values("Wanda", "Jinmen_Road, Heilong", "Cinema_ticket")
+
+ select * from bills
+   ...> inner join banks on banks.source_unique_code = bills.source_unique_code;
+   
+   select providers.provider_name,associative_notification.notification_type
+   from provider.provider_name = associative_notification.notification_type;
+   
+   
+   
+   
+   select * from customer inner join bills on bills.customer_id = customer.customer_id;
+select customer.customer_name,bills.type,sum(bills.amount),bills.due_dates from customer inner join bills on bills.customer_id = customer.customer_id where customer.customer_name = "Riya";
