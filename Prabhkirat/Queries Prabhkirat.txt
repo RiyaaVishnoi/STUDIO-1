@@ -1,0 +1,69 @@
+
+
+
+Final queries 
+
+Prabhkirat //
+
+
+1st
+
+
+select bill_number, customer_name, bill_type ,bill_amount, Provider_name, notification_type from banks
+inner join bills on (banks.bank_identity_code = bills.bank_identity_code)
+inner join customer on (bills.customer_id=customer.customer_id)
+inner join associative_notification on (customer.customer_id =associative_notification.customer_id)
+where customer.customer_name like "Mia Chinchinga"
+;
+
+2 nd query.
+select customer_name, bill_amount, bill_amount * 2 as "Bills After Fine", notification_type from bills
+inner join customer on (bills.customer_id = customer.customer_id)
+left join associative_notification on (customer.customer_id = associative_notification.customer_id)
+where notification_type like "missed" AND customer_name like "Zain Malik"
+;
+
+3 rd query
+select SUM(bill_amount),
+customer_name ,
+bill_type,
+"1 Month" as Time
+from bills 
+inner join customer on (bills.customer_id = customer.customer_id)
+where customer_name like "Riya Vishnoi";
+
+4 query
+delete from associative_notification
+where customer_id = "008" AND notification_type = "paid";
+select * from associative_notification
+where customer_id = "008";
+
+
+5 querry.
+select bill_number as 'NUMBER',
+customer_name as 'OWNER NAME',
+bill_amount as 'AMOUNT',
+notification_type as 'TYPE'
+from bills
+inner join customer on (bills.customer_id = customer.customer_id)
+inner join associative_notification on (customer.customer_id = associative_notification.customer_id)
+where customer_name ="Mia Chinchinga" 
+order by "AMOUNT" asc;
+
+
+ 6 querry ***
+UPDATE bills
+SET due_dates = "04/05/2023"
+WHERE bill_type = "water";
+
+SELECT bill_number, customer_name, bill_type, bill_amount, due_dates AS "New Dates"
+FROM bills
+INNER JOIN customer ON (bills.customer_id = customer.customer_id)
+INNER JOIN associative_notification ON (customer.customer_id = associative_notification.customer_id)
+WHERE notification_type IN ("missed", "paid") AND customer_name = "Prabhikt Singh";
+
+
+// riya// 
+
+Select * from customer inner join bills on (customer.customer_id) = (bills.customer_id);
+
