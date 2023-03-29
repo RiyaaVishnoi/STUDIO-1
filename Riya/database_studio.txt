@@ -1,0 +1,94 @@
+
+.mode columns
+.headers on
+PRAGMA foreign_key = on;
+drop table banks;
+drop table bills;
+
+
+Create table banks(
+source_name text ,
+source_unique_code text primary key,
+source_type text
+);
+insert into banks(source_name, source_unique_code, source_type)
+values ("ANZ", "23e45", "credit");
+insert into banks(source_name, source_unique_code,source_type)
+values("BNZ", "234e", "debit");
+insert into banks(source_name, source_unique_code,source_type)
+values("ASB", "56gt", "cheque");
+
+
+Create table bills(
+bill_number number primary key,
+bill_type text,
+bill_amount number,
+due_dates text,
+customer_id text,
+source_unique_code text,
+foreign key (customer_id) references customer(customer_id)
+foreign key (source_unique_code) references banks(source_unique_code)
+);
+insert into bills (bill_number, bill_type, bill_amount, due_dates) values ("234", "water", 243, "12/03/2023");
+insert into bills (bill_number, bill_type, bill_amount, due_dates) values ("235", "electricity", 123, "21/03/2023");
+insert into bills (bill_number, bill_type, bill_amount, due_dates) values ("266", "rent", 120, "22/03/2023");
+insert into bills (bill_number, bill_type, bill_amount, due_dates) values ("270", "internet", 213, "24/03/2023");
+insert into bills (bill_number, bill_type, bill_amount, due_dates) values ("276", "mobile phone", 255, "27/03/2023"); 
+select * from bills;
+
+
+
+create table customer(
+customer_name text,
+customer_id integer primary key autoincrement,
+customer_bank balance number,
+customer_account number
+);
+
+insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Mia", 001, 3500, 10034);
+
+insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Riya", 002, 2000, 10035);
+
+insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Shilong", 003, 2000, 10036);
+
+insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Prabhikt", 004, 7000, 10037);
+
+insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Yager", 005, 3000, 10038);
+
+insert into customer(customer_name,customer_id,customer_bank,customer_account) values("Zain", 006, 1800, 10039);
+
+
+
+Create table associative_notification (notification_type text, customer_id number, provider_name text, foreign key (customer_id) references customer(customer_id), foreign key(provider_name) references providers(provider_name));
+
+Insert into associative_notification values ('due', 001, "Telecom");
+
+Insert into associative_notification( notification_type,customer_id,provider_name) values ('paid', 002,"Power_Grid_Corporation");
+
+Insert into associative_notification( notification_type,customer_id,provider_name) values ('paid', 001,"landlord");
+
+Insert into associative_notification( notification_type,customer_id,provider_name) values ('due', 004,"landlord");
+
+Insert into associative_notification( notification_type,customer_id,provider_name) values ('missed', 006,"Water_Corporation");
+Insert into associative_notification( notification_type,customer_id,provider_name) values ('paid', 003,"Power_Grid_Corporation");
+Insert into associative_notification( notification_type,customer_id,provider_name) values ('due', 006,"Telecom");
+
+
+
+Create table providers(
+
+Provider_name text,
+
+Provider_address text,
+
+Provider_type text
+
+);
+
+Insert into providers values('Telecom', '33 Victoria road', 'communication');
+
+Insert into providers values('Power_Grid_Corporation', '39 queen street', 'electricity');
+
+Insert into providers values('landlord', '58 queen st', 'rent');
+
+Insert into providers values('Water_Corporation','24d Victoria Invercargill', 'Water');
