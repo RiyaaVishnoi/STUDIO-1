@@ -1,0 +1,121 @@
+.mode columns .headers on PRAGMA foreign_keys = on; drop table banks; drop table bills;
+ 
+
+
+//--------------------------TABLE NUMBER 1 (BANKS)--------------------------------------//
+CREATE TABLE banks (
+    bank_identity_code text primary key,
+    bank_Name text,
+    bank_payment_Method text
+);
+
+ 
+INSERT into banks values ('BOFA','Bank of America', 'Credit Card');
+
+INSERT into banks values ('WELLS','Wells Fargo', 'Debit Card');
+
+INSERT into banks values ('CHASE','Chase BankA','ACH Transfer');
+
+INSERT into banks values ('CITI','Citibank','Wire Transfer');
+
+INSERT into banks values ('ANZ', 'ANZ','Debit Card');
+
+insert into banks values ('BNZ','Bank of NZ','Debit Card');
+insert into banks values ('ICBC','ICBC','Credit Card');
+
+
+insert into banks values ('ANZ2', 'ANZ2','Wire Transfer');
+
+insert into banks values ('ANZ3', 'ANZ3','Credit Card');
+
+insert into banks values ('ICBC2','ICBC2','ACH Transfer');
+
+
+insert into banks values ('WELLS','Wells Fargo2','Credit Card');
+ //--------------------------TABLE NUMBER 2 (CUSTOMER)--------------------------------------//
+ 
+ 
+create table customer(customer_name text,customer_id integer primary key autoincrement,customer_bank balance number,customer_account number autoincrement );
+ 
+insert into customer values("Mia Chinchinga", 001, 3500, 10034); insert into customer values("Riya Vishnoi", 002, 2000, 10035); insert into customer values("Shilong Lan", 003, 2000, 10036); insert into customer values("Prabhikt Singh", 004, 7000, 10037); insert into customer values("Zhang Lei", 005, 3000, 10038); insert into customer values("Zain Malik", 006, 800, 10039); insert into customer values("Mitchell Obama", 007, 9000, 10040); insert into customer values("Ryan Adrian", 008, 4000, 10041); insert into customer values("Sia Clarkson", 009, 1000, 10042);
+insert into customer values("Rihanna Manadez", 010, 3000, 10043);
+insert into customer values("Selena Ellison", 011, 10000, 10044);
+insert into customer values("Felicity Wilkins", 012, 44000, 10045);
+insert into customer values("Trevor Rampling", 013, 12000, 10046);
+insert into customer values("Phil Ham", 014, 100, 10047);
+insert into customer values("Tracey Burgees", 015, 5000, 10048);
+insert into customer values("Sebastian Glover", 016, 41000, 10049);
+insert into customer values("Julian Hemmings", 017, 13040, 10050);
+insert into customer values("John Wick", 018, 90004, 10051);
+
+
+ 
+//--------------------------TABLE NUMBER 3(BILLS)--------------------------------------//
+
+ CREATE TABLE bills (
+  bill_number text PRIMARY KEY,
+  bill_type text,
+  bill_amount number,
+  due_dates text,
+  customer_id integer,
+  bank_identity_code text,
+  FOREIGN KEY(customer_id) REFERENCES customer(customer_id),
+  FOREIGN KEY(bank_identity_code) REFERENCES banks(bank_identity_code)
+
+);
+
+
+
+ 
+insert into bills values ("B266","rent", 120, "22/03/2023", 001, "234e"); insert into bills values ("B290", "electricity", 345, "09/04/2023", 001,"56gt");
+
+
+insert into bills values ("B270", "internet", 213, "24/03/2023", 002, "23e45");
+
+insert into bills values ("B289", "TV", 122, "08/04/2023", 002, "456t");
+ insert into bills values ("B234", "water", 243, "12/03/2023", 003, "56gt");
+insert into bills values ("B280", "Wi-Fi", 234, "31/03/2023", 003, "456tc");
+insert into bills values ("B291", "Spotify Subscription", 45, "09/02/2023", 003, "456tc");
+
+
+insert into bills values ("B281", "water", 212, "31/03/2023", 004, "rt5d");
+
+ insert into bills values ("B235", "electricity", 123, "21/03/2023", 005, "56gt"); insert into bills values ("B285", "internet", 156, "03/04/2023", 005, "23E45"); 
+ insert into bills values ("B286", "Mobile phone", 167, "05/04/2023", 006, "rt5");
+
+
+insert into bills values ("B279", "TV", 266, "30/03/2023", 007, "23e45");
+insert into bills values ("B293", "Wi-Fi", 304, "31/04/2023", 007, "456tc");
+
+ insert into bills values ("B276", "mobile phone", 255, "27/03/2023", 009, "234e");  insert into bills values ("B292", "Spotify Subscription", 15, "09/04/2023", 009, "23y45");
+
+ insert into bills values ("B297", "Spotify Subscription", 325, "28/04/2023", 015, "23e45"); insert into bills values ("B296", "TV", 233, "03/04/2023", 015, "23E45"); 
+
+ 
+//--------------------------TABLE NUMBER 4 (PROVIDERS)--------------------------------------//
+
+
+Create table providers( Provider_name text primary key, Provider_address text， Provider_type text );
+ 
+
+
+Insert into providers values("Telecom", "63 Tia Road, Shanghai", "Communication"); Insert into providers values("Power Grid Corporation", "21 Victoria avenue Invercargill", "Electricity"); Insert into providers values("Rent", "58 Queen street", "Rent"); Insert into providers values("Water Corporation", "48 Wakefield street", "Water"); Insert into providers values("Petrochemical corporation", "1 Howick avenue", "Petroleum"); Insert into providers values("Great wall broadband", "52 Xiahe street", "Broadband"); Insert into providers values("life insurance", "11 Jack street", "Insurance"); Insert into providers values("Uber Corp", "41 Dongi", "Taxi"); Insert into providers values("ANZ Bank", "123 leek street", "Bank Credit"); Insert into providers values("Spotify", "Jin Road", "Spotify Music");
+
+//--------------------------TABLE NUMBER 5 (NOTIFICATIONS(ASSOCIATIVE ENTITY))--------------------------------------//
+
+
+ Create table associative_notification (notification_type text, customer_id integer,Provider_name text, foreign key (customer_id) references customer(customer_id), foreign key(Provider_name) references providers(Provider_name));
+
+ Insert into associative_notification values ('due', 001, "Telecom"); Insert into associative_notification values ('paid', 002, "Power Grid Corporation");
+Insert into associative_notification values ('paid', 003, "Power Grid Corporation"); Insert into associative_notification values ('due', 004, "Rent"); Insert into associative_notification values ('missed', 004, "ANZ Bank"); Insert into associative_notification values ('paid', 005, "Rent");
+Insert into associative_notification values ('missed', 006, "Water Corporation"); Insert into associative_notification values ('due', 006, "Telecom"); Insert into associative_notification values ('due', 007, "Uber Corp"); Insert into associative_notification values ('missed', 008, "Uber Corp"); Insert into associative_notification values ('paid', 008, "ANZ Bank");
+Insert into associative_notification values ('paid', 009, "life insurance");
+Insert into associative_notification values ('missed', 001, "ANZ Bank");
+Insert into associative_notification values ('missed', 004, "Spotify");
+Insert into associative_notification values ('missed', 002, "Telecom");
+Insert into associative_notification values ('missed', 007, "Rent");
+Insert into associative_notification values ('due', 002, "Spotify");
+Insert into associative_notification values ('due', 006, "life insurance");
+Insert into associative_notification values ('due', 004, "Uber Corp");
+Insert into associative_notification values ('due', 006, "Petrochemical corporation");
+
